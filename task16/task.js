@@ -57,7 +57,6 @@ function renderAqiList() {
     for (e in aqiData) {
         thead += tbody.replace('{cityName}',e).replace('{aqiData}',aqiData[e]);
     }
-
     aqiTable.innerHTML = thead;
 }
 
@@ -74,9 +73,11 @@ function addBtnHandle() {
  * 点击各个删除按钮的时候的处理逻辑
  * 获取哪个城市数据被删，删除数据，更新表格显示
  */
-function delBtnHandle() {
+function delBtnHandle(e) {
   // do sth.
-
+  var removeE = e.target.parentNode.parentNode.firstChild.innerHTML;
+  delete aqiData[removeE];
+  console.log(aqiData);
   renderAqiList();
 }
 
@@ -85,7 +86,7 @@ function init() {
   // 在这下面给add-btn绑定一个点击事件，点击时触发addBtnHandle函数
   document.getElementById('add-btn').addEventListener('click',addBtnHandle);
   // 想办法给aqi-table中的所有删除按钮绑定事件，触发delBtnHandle函数
-
+  document.getElementById('aqi-table').addEventListener('click',delBtnHandle);
 }
 
 init();
